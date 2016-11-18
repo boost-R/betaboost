@@ -7,12 +7,15 @@ Function for boosting beta regression
 Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit BetaRegression.
 }
 \usage{
-betaboost(formula, data = list(), iterations = 100)
+betaboost(formula, phi.formula,  data = list(), iterations = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{formula}{
-description of the model to be fit.
+description of the model to be fit for location parameter.
+}
+  \item{phi.formula}{
+description of the model to be fit for precission parameter.
 }
   \item{data}{
 a data frame containing the variables.
@@ -46,9 +49,16 @@ x4 <- rnorm(100)
 y <- rBE(n = 100, mu = plogis(x1 +x2),
                   sigma = plogis(x3 + x4))
 data <- data.frame(y ,x1, x2, x3, x4)
-data <- data[!data$y%in%c(0,1),]
+data <- data[!data$y \%in\% c(0,1),]
 
-betaboost(formula = y~ x1 + x2, data = data,
+# 'classic' beta regression
+betaboost(formula = y ~ x1 + x2, data = data,
           iterations = 120)
+
+# beta regression including modeled precission parameter
+betaboost(formula = y ~ x1 + x2, 
+          phi.formula = y ~ x3 + x4, 
+          data = data, iterations = 120)
+
 
 }

@@ -1,7 +1,8 @@
 import("mboost")
 import("gamboostLSS")
 
-importFrom("stats", "qlogis", "plogis", "optimize")
+
+importFrom("stats", "qlogis", "plogis", "optimize", "coef")
 
 
-export(BetaReg, betaboost)
+export(BetaReg, betaboost, make_mboostform)

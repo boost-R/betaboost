@@ -1,4 +1,4 @@
-Package: HRQoLBoost
+Package: betaboost
 Type: Package
 Title: Boosting Beta Regression
 Version: 0.1.0
@@ -8,3 +8,4 @@ Description: Implements beta regression for model based boosting.
 License: GPL-2
 LazyData: TRUE
 Depends: mboost, gamboostLSS
+Suggests: gamlss.dist
