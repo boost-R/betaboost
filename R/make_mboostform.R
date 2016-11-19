@@ -13,10 +13,9 @@ make_mboostform <- function(formula)
   if(! any(ns)) return(form)
   else{
     labs[ns] <-   gsub(x = labs[ns], "s\\(", "bbs\\(")
-    labs[!ns] <- paste("bols(", labs[!ns], ", intercept = FALSE)", sep = "")
+    labs[!ns] <- paste("bols(", labs[!ns], ", intercept = TRUE)", sep = "")
   }
   rform <- paste(paste(all.vars(form[[2]]), " ~ ", sep = ""), 
                  paste(labs, collapse = " + "))
   return(as.formula(rform))
 }
-  
