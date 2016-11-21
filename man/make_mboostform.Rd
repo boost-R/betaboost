@@ -1,5 +1,7 @@
 \name{make_mboostform}
 \alias{make_mboostform}
+\alias{add_bolsform}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Building mboost formulas
@@ -9,6 +11,7 @@ Transforms 'classic' formula objects (\code{y ~ x1 + s(x2)}) to \code{mboost} fo
 }
 \usage{
 make_mboostform(formula)
+add_bolsform(formula)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

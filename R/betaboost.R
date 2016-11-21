@@ -26,10 +26,11 @@ betaboost <- function(formula, phi.formula = NULL, data = list(),
   if(form.type[1] == "gamboost")
   {
     # check if any base-learners defined
-    ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, nchar(x)-1, nchar(x)), pattern = ")") ) 
+    ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, nchar(x)-1, nchar(x)), 
+                                                      pattern = ")") ) 
     anysmooth <- any(ns)
-    mformula <- oformula
-    if(!no.phi) mphi.formula <- phi.formula
+    mformula <- add_bolsform(oformula)
+    if(!no.phi) mphi.formula <- add_bolsform(phi.formula)
   }
    
 # check if y is in range

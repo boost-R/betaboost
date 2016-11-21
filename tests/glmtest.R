@@ -29,9 +29,9 @@ stopifnot(identical(coef(b1),coef(b1b), coef(b1c), coef(g1)))
 
 b2 <- betaboost(formula = y ~ x1 + s(x2), data = data, form.type = "classic",
                 iterations = 120)
-b2b <- betaboost(formula = y ~ bols(x1, intercept = TRUE) + bbs(x2), data = data, form.type = "gamboost",
+b2b <- betaboost(formula = y ~ bols(x1) + bbs(x2), data = data, form.type = "gamboost",
                  iterations = 120)
-b2c <- betaboost(formula = y ~ bols(x1) + bbs(x2), data = data, 
+b2c <- betaboost(formula = y ~ x1 + bbs(x2), data = data, 
                  iterations = 120)
 g2 <- gamboost(y ~ bols(x1) + bbs(x2), data = data, family = BetaReg(),
                control = boost_control(mstop = 120))
@@ -59,8 +59,8 @@ b4 <- betaboost(formula = y ~ s(x1) + x2,
                 data = data, form.type = "classic",
                 iterations = 120)
 
-g4 <- gamboostLSS(list(mu = y ~ bbs(x1) + bols(x2, intercept = TRUE), 
-                       phi = y ~ bols(x3, intercept = TRUE) + bbs(x4)), 
+g4 <- gamboostLSS(list(mu = y ~ bbs(x1) + bols(x2), 
+                       phi = y ~ bols(x3) + bbs(x4)), 
                   families = BetaLSS(), 
                   data = data)
 stopifnot(identical(coef(b4),  
@@ -72,4 +72,6 @@ stopifnot(identical(coef(b4),
 try(betaboost(formula = y ~ x1, phi.formula = x1 ~ x2, 
          data = data))
 
+b2d <- betaboost(formula = y ~ x1 + bbs(x2), data = data, form.type = "gamboost",
+                 iterations = 120)
 

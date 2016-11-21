@@ -3,6 +3,7 @@
 #
 # 
 
+# should also deal with mixed formulas
 
 make_mboostform <- function(formula)
 {
@@ -13,8 +14,24 @@ make_mboostform <- function(formula)
   if(! any(ns)) return(form)
   else{
     labs[ns] <-   gsub(x = labs[ns], "s\\(", "bbs\\(")
-    labs[!ns] <- paste("bols(", labs[!ns], ", intercept = TRUE)", sep = "")
+    labs[!ns] <- paste("bols(", labs[!ns], ")", sep = "")
   }
+  rform <- paste(paste(all.vars(form[[2]]), " ~ ", sep = ""), 
+                 paste(labs, collapse = " + "))
+  return(as.formula(rform))
+}
+
+add_bolsform <-  function(formula)
+{
+  
+  form <- as.formula(formula)
+  labs <- attr(terms.formula(form), "term.labels")
+  ns <- sapply(labs, function(x) grepl(substr(x, nchar(x)-1, nchar(x)), 
+                                                    pattern = ")") ) 
+  if(! any(ns)) return(form)
+  else{
+      labs[!ns] <- paste("bols(", labs[!ns], ")", sep = "")
+  } 
   rform <- paste(paste(all.vars(form[[2]]), " ~ ", sep = ""), 
                  paste(labs, collapse = " + "))
   return(as.formula(rform))
