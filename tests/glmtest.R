@@ -16,27 +16,35 @@ rm(x1,x2,x3,x4,y)
 # just modelling mu
 
 b1 <- betaboost(formula = y ~ x1 + x2, data = data, form.type = "classic",
-      iterations = 12)
+      iterations = 120)
+rb1 <- R2.betaboost(model = b1, data = data)
 b1b <- betaboost(formula = y ~ x1 + x2, data = data, form.type = "gamboost",
-                iterations = 12)
+                iterations = 120)
 b1c <- betaboost(formula = y ~ x1 + x2, data = data, 
-                 iterations = 12)
+                 iterations = 120)
 g1 <- glmboost(y ~ x1 + x2, data = data, family = BetaReg(),
-               control = boost_control(mstop = 12))
+               control = boost_control(mstop = 120))
+rg1 <- R2.betaboost(model = g1, data = data)
 stopifnot(identical(coef(b1),coef(b1b), coef(b1c), coef(g1)))
+
 
 # now with smooth
 
 b2 <- betaboost(formula = y ~ x1 + s(x2), data = data, form.type = "classic",
                 iterations = 120)
+rb2 <- R2.betaboost(model = b2, data = data)
+
 b2b <- betaboost(formula = y ~ bols(x1) + bbs(x2), data = data, form.type = "gamboost",
                  iterations = 120)
 b2c <- betaboost(formula = y ~ x1 + bbs(x2), data = data, 
                  iterations = 120)
 g2 <- gamboost(y ~ bols(x1) + bbs(x2), data = data, family = BetaReg(),
                control = boost_control(mstop = 120))
+rg2 <- R2.betaboost(model = g2, data = data)
+
 stopifnot(identical(coef(b2),coef(b2b)))
 stopifnot(identical(coef(b2c),coef(g2)))
+cbind(rb1, rg1, rb2, rg2)
 
 
 # now modelling also phi
@@ -44,7 +52,8 @@ stopifnot(identical(coef(b2c),coef(g2)))
 b3 <- betaboost(formula = y ~ x1 + x2, 
                 phi.formula = y ~ x3 + x4, 
                 data = data, form.type = "classic",
-                iterations = 120)
+                iterations = 1200)
+R2.betaboost(b3, data = data)
 
 g3 <- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4), 
                   families = BetaLSS(), 
