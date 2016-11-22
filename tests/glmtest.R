@@ -52,7 +52,7 @@ cbind(rb1, rg1, rb2, rg2)
 b3 <- betaboost(formula = y ~ x1 + x2, 
                 phi.formula = y ~ x3 + x4, 
                 data = data, form.type = "classic",
-                iterations = 1200)
+                iterations = 120)
 R2.betaboost(b3, data = data)
 
 g3 <- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4), 

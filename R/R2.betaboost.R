@@ -20,7 +20,8 @@ R2.betaboost <- function(model, data, newdata = NULL){
    if(any(class(model) %in% "mboost"))
      {
       
-      which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$response)), MAR = 2))
+      which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$response)), 
+                                      MARGIN = 2))
       name.response <- names(data)[which.response]
      
        # base-model
@@ -43,7 +44,8 @@ R2.betaboost <- function(model, data, newdata = NULL){
   
   if(any(class(model) %in% "mboostLSS"))
   {
-    which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$mu$response)), MAR = 2))
+    which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$mu$response)), 
+                                    MARGIN = 2))
     name.response <- names(data)[which.response]
     
     
