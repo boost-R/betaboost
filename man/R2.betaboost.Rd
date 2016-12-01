@@ -1,4 +1,5 @@
 \name{R2.betaboost}
+\alias{LH.betaboost}
 \alias{R2.betaboost}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{

@@ -6,4 +6,4 @@ importFrom("stats", "qlogis", "plogis", "optimize", "coef",
            "as.formula", "terms.formula", "cor", "predict")
 
 
-export(BetaReg, betaboost, make_mboostform, add_bolsform, R2.betaboost)
+export(BetaReg, betaboost, make_mboostform, add_bolsform, R2.betaboost, LH.betaboost)
