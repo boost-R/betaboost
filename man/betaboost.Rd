@@ -8,7 +8,7 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit Bet
 }
 \usage{
  betaboost(formula, phi.formula = NULL, data = list(), 
-           iterations = 100, form.type = c("gamboost", "classic"))
+           iterations = 100, form.type = c("gamboost", "classic"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,10 @@ number of boosting iterations to be used.
 }
   \item{form.type}{
   formula type: either \code{gamboost} (y ~ bols(x1) + bbs(x2)), specifying base-learners or \code{classic} (y ~ x1 + s(x2)). 
+  }
+  
+  \item{...}{
+Additional arguments passed to mboost or gamboostLSS fitting functions.
   }
 }
 \details{

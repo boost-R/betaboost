@@ -61,6 +61,20 @@ g3 <- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4),
 stopifnot(identical(coef(b3, off2int = TRUE),  
                     coef(g3[120], off2int = TRUE)))
 
+# method 
+
+b3b <- betaboost(formula = y ~ x1 + x2, 
+                phi.formula = y ~ x3 + x4, 
+                data = data, form.type = "classic",
+                iterations = 120, method = "inner")
+R2.betaboost(b3, data = data)
+
+g3b<- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4), 
+                  families = BetaLSS(), 
+                  data = data, method = "inner")
+stopifnot(identical(coef(b3b, off2int = TRUE),  
+                    coef(g3b[120], off2int = TRUE)))
+
 # now with smooth
 
 b4 <- betaboost(formula = y ~ s(x1) + x2, 

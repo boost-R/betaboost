@@ -2,8 +2,10 @@ import("mboost")
 import("gamboostLSS")
 
 
-importFrom("stats", "qlogis", "plogis", "optimize", "coef", 
-           "as.formula", "terms.formula", "cor", "predict")
+importFrom("stats", "coef", "dnorm", "lm", "optimize", "resid",
+             "rnorm", "runif", "sd", "var",  "as.formula", "cor", "plogis", "predict", "qlogis",
+             "terms.formula")
+
 
 
 export(BetaReg, betaboost, make_mboostform, add_bolsform, R2.betaboost, LH.betaboost)

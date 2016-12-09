@@ -5,7 +5,7 @@
 # when ~ bols(x1) + bbs(x2) -> gamboost LSS
 
 betaboost <- function(formula, phi.formula = NULL, data = list(), 
-                      iterations = 100, form.type = c("gamboost", "classic"))
+                      iterations = 100, form.type = c("gamboost", "classic"), ...)
 {
    no.phi <- is.null(phi.formula)
    
@@ -44,12 +44,12 @@ betaboost <- function(formula, phi.formula = NULL, data = list(),
    if(!anysmooth){
    obj <- glmboost(mformula, data = data,
                  control = boost_control(mstop = iterations),
-                 family = BetaReg())
+                 family = BetaReg(), ...)
    }
    if(anysmooth){
    obj <- gamboost(mformula, data = data,
                    control = boost_control(mstop = iterations),
-                   family = BetaReg())
+                   family = BetaReg(), ...)
    }
  }else{
   # mf2 <- model.frame(phi.formula, data = data)
@@ -59,14 +59,14 @@ betaboost <- function(formula, phi.formula = NULL, data = list(),
   obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                     phi = formula(mphi.formula)), data = data,
                     control = boost_control(mstop = iterations),
-                    families = BetaLSS())
+                    families = BetaLSS(), ...)
    }
    if(anysmooth)
    {
      obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                        phi = formula(mphi.formula)), data = data,
                         control = boost_control(mstop = iterations),
-                        families = BetaLSS())
+                        families = BetaLSS(), ...)
      
    }
  }
