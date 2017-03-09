@@ -7,7 +7,7 @@ Function for boosting beta regression
 Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit BetaRegression.
 }
 \usage{
- betaboost(formula, phi.formula = NULL, data = list(), 
+ betaboost(formula, phi.formula = NULL, data = list(), sl = 0.1,
            iterations = 100, form.type = c("gamboost", "classic"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -24,7 +24,10 @@ a data frame containing the variables.
   \item{iterations}{
 number of boosting iterations to be used.
 }
-  \item{form.type}{
+  \item{sl}{
+used step-length, default is 0.1
+}
+\item{form.type}{
   formula type: either \code{gamboost} (y ~ bols(x1) + bbs(x2)), specifying base-learners or \code{classic} (y ~ x1 + s(x2)). 
   }
   
