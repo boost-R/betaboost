@@ -106,13 +106,28 @@ b4 <- betaboost(formula = y ~ x1 + x2,
                 method = "cyclic", sl = c(mu = 0.01, phi = .1))
 coef(b4, off2int = TRUE)
 
+# change offset 
+
+b4 <- betaboost(formula = y ~ x1 + x2, 
+                phi.formula = y ~ x3 + x4, 
+                data = data, iterations = 120, 
+                start.mu = 0.5, start.phi = 1,
+                method = "cyclic", sl = c(mu = 0.01, phi = .1))
+coef(b4, off2int = TRUE)
+stopifnot(b4$mu$offset == qlogis(0.5) & 
+          b4$phi$offset == log(1))
+
+# should be ignored if only mu is modelled
+b4 <- betaboost(formula = y ~ x1 + x2, start.mu = 0.1, 
+                data = data, iterations = 120)
+# should trigger a warning
+stopifnot(identical(coef(b1, off2int = TRUE),
+  coef(b4, off2int = TRUE)))
 
 
 # Errors 
-
 try(betaboost(formula = y ~ x1, phi.formula = x1 ~ x2, 
          data = data))
-
 b2d <- betaboost(formula = y ~ x1 + bbs(x2), data = data, form.type = "gamboost",
                  iterations = 120)
 

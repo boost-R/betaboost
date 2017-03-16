@@ -11,8 +11,11 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
    no.phi <- is.null(phi.formula)
    if(any(c(!is.null(start.mu), !is.null(start.phi))) 
       & no.phi){ 
+     start.mu <- NULL
+     start.phi <- NULL
      warning("starting values will be ignroed when only mu is modelled")
-   }
+  
+     }
    
    if(any(start.mu <=0) | any(start.mu >= 1)) {
      start.mu <- NULL
