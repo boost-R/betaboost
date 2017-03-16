@@ -8,7 +8,8 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit Bet
 }
 \usage{
  betaboost(formula, phi.formula = NULL, data = list(), sl = 0.1,
-           iterations = 100, form.type = c("gamboost", "classic"), ...)
+           iterations = 100, form.type = c("gamboost", "classic"),
+           start.mu = NULL, start.phi = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,7 +31,14 @@ used step-length, default is 0.1
 \item{form.type}{
   formula type: either \code{gamboost} (y ~ bols(x1) + bbs(x2)), specifying base-learners or \code{classic} (y ~ x1 + s(x2)). 
   }
-  
+
+\item{start.mu}{
+  offset value for mu, must be >0 and <1; will be estimated from the outcome if none is specified (default). 
+  }  
+
+\item{start.phi}{
+  offset value for phi, must be >0; will be estimated from the outcome if none is specified (default). 
+  }    
   \item{...}{
 Additional arguments passed to mboost or gamboostLSS fitting functions.
   }

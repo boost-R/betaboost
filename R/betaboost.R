@@ -9,7 +9,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
                       start.mu = NULL, start.phi = NULL, ...)
 {
    no.phi <- is.null(phi.formula)
-   if(any(c(is.null(start.mu), is.null(start.phi))) 
+   if(any(c(!is.null(start.mu), !is.null(start.phi))) 
       & no.phi){ 
      warning("starting values will be ignroed when only mu is modelled")
    }
@@ -57,7 +57,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
    if(!anysmooth){
    obj <- glmboost(mformula, data = data,
                  control = boost_control(mstop = iterations, nu = sl),
-                 family = BetaReg, ...)
+                 family = BetaReg(), ...)
    }
    if(anysmooth){
    obj <- gamboost(mformula, data = data,
@@ -79,7 +79,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
      obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                        phi = formula(mphi.formula)), data = data,
                         control = boost_control(mstop = iterations, nu = sl),
-                        families = BetaLSS(), ...)
+                        families = BetaLSS(mu = start.mu, phi = start.phi), ...)
      
    }
  }
