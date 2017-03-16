@@ -89,8 +89,26 @@ g4 <- gamboostLSS(list(mu = y ~ bbs(x1) + bols(x2),
 stopifnot(identical(coef(b4),  
                     coef(g4[120])))
 
+# change step length
 
-# Errprs 
+# now change step-length
+b3 <- betaboost(formula = y ~ x1 + x2, 
+                phi.formula = y ~ x3 + x4, 
+                data = data, iterations = 120, 
+                method = "cyclic", sl = 0.01)
+coef(b3, off2int = TRUE)
+
+
+# different values
+b4 <- betaboost(formula = y ~ x1 + x2, 
+                phi.formula = y ~ x3 + x4, 
+                data = data, iterations = 120, 
+                method = "cyclic", sl = c(mu = 0.01, phi = .1))
+coef(b4, off2int = TRUE)
+
+
+
+# Errors 
 
 try(betaboost(formula = y ~ x1, phi.formula = x1 ~ x2, 
          data = data))

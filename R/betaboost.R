@@ -5,10 +5,23 @@
 # when ~ bols(x1) + bbs(x2) -> gamboost LSS
 
 betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
-                      iterations = 100, form.type = c("gamboost", "classic"), ...)
+                      iterations = 100, form.type = c("gamboost", "classic"), 
+                      start.mu = NULL, start.phi = NULL, ...)
 {
    no.phi <- is.null(phi.formula)
+   if(any(c(is.null(start.mu), is.null(start.phi))) 
+      & no.phi){ 
+     warning("starting values will be ignroed when only mu is modelled")
+   }
    
+   if(any(start.mu <=0) | any(start.mu >= 1)) {
+     start.mu <- NULL
+     warning("start.mu must be >0 and <1; will be ignored")
+   }
+   if(any(start.phi <=0)) {
+     start.phi <- NULL
+     warning("start.phi must be >0 !; will be ignored")
+   }
    # deal with formula
    oformula <- formula
    labs <- attr(terms.formula(oformula), "term.labels")
@@ -44,7 +57,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
    if(!anysmooth){
    obj <- glmboost(mformula, data = data,
                  control = boost_control(mstop = iterations, nu = sl),
-                 family = BetaReg(), ...)
+                 family = BetaReg, ...)
    }
    if(anysmooth){
    obj <- gamboost(mformula, data = data,
@@ -59,7 +72,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
   obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                     phi = formula(mphi.formula)), data = data,
                     control = boost_control(mstop = iterations, nu = sl),
-                    families = BetaLSS(), ...)
+                    families = BetaLSS(mu = start.mu, phi = start.phi), ...)
    }
    if(anysmooth)
    {
