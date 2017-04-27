@@ -5,7 +5,7 @@
 # when ~ bols(x1) + bbs(x2) -> gamboost LSS
 
 betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
-                      iterations = 100, form.type = c("gamboost", "classic"), 
+                      iterations = 100, form.type = c("classic", "gamboost"), 
                       start.mu = NULL, start.phi = NULL, ...)
 {
    no.phi <- is.null(phi.formula)
