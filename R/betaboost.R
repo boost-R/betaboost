@@ -78,39 +78,39 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
   # y2 <- model.response(mf2)
   # if(! identical(y, y2)) stop("response for both formulas must be the same") 
    if(!anysmooth){
-     if(any(!is.null(start.mu), !is.null(start.phi)))
+     if(any(!is.null(start.mu), !is.null(start.phi), stabilization != "none")){
+      
      {
     obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                       phi = formula(mphi.formula)), data = data,
                        control = boost_control(mstop = iterations, nu = sl),
                        families = BetaLSS(mu = start.mu, phi = start.phi, 
-                                          stabilization = stabilization), ...)
+                                          stabilization), ...)
      }
      else{
        obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                          phi = formula(mphi.formula)), data = data,
                           control = boost_control(mstop = iterations, nu = sl),
-                          families = BetaLSS(stabilization = stabilization), ...)
+                          families = BetaLSS(), ...)
        
      }
      
    }
    if(anysmooth)
    {
-     if(any(!is.null(start.mu), !is.null(start.phi)))
-     {
+     if(any(!is.null(start.mu), !is.null(start.phi), stabilization != "none")){
        
      obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                        phi = formula(mphi.formula)), data = data,
                         control = boost_control(mstop = iterations, nu = sl),
                         families = BetaLSS(mu = start.mu, phi = start.phi, 
-                                           stabilization = stabilization), ...)
+                                           stabilization), ...)
      }
      else{
        obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                          phi = formula(mphi.formula)), data = data,
                           control = boost_control(mstop = iterations, nu = sl),
-                          families = BetaLSS(stabilization = stabilization), ...)
+                          families = BetaLSS(), ...)
        
        
      }
