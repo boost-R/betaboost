@@ -10,7 +10,7 @@ R ad-on packages `mboost` and `gamboostLSS`.
 Latest version from GitHub:
   ```
   library("devtools")
-  install_github("mayrandy/betaboost")
+  install_github("boost-R/betaboost")
   library("betaboost")
   ```
   
