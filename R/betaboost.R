@@ -79,15 +79,13 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
   # if(! identical(y, y2)) stop("response for both formulas must be the same") 
    if(!anysmooth){
      if(any(!is.null(start.mu), !is.null(start.phi), stabilization != "none")){
-      
-     {
+
     obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                       phi = formula(mphi.formula)), data = data,
                        control = boost_control(mstop = iterations, nu = sl),
                        families = BetaLSS(mu = start.mu, phi = start.phi, 
                                           stabilization), ...)
-     }
-     else{
+     }else{
        obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                          phi = formula(mphi.formula)), data = data,
                           control = boost_control(mstop = iterations, nu = sl),
