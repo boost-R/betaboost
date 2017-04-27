@@ -5,7 +5,7 @@
 # when ~ bols(x1) + bbs(x2) -> gamboost LSS
 
 betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
-                      iterations = 100, form.type = c("classic", "gamboost"), 
+                      iterations = 100, form.type = c("gamboost", "classic"), 
                       start.mu = NULL, start.phi = NULL, 
                       stabilization = c("none", "MAD", "L2"), ...)
 {
@@ -16,7 +16,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
      start.phi <- NULL
      warning("starting values will be ignored when only mu is modelled")
    }
-   
+   stabilization <- match.arg(stabilization)
    if(stabilization != "none" & no.phi){ 
      warning("stabilization will be ignored when only mu is modelled")
    }
