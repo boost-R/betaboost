@@ -5,10 +5,10 @@
 
 # should also deal with mixed formulas
 
-make_mboostform <- function(formula)
+make_mboostform <- function(formula, data = NULL)
 {
   form <- as.formula(formula)
-  labs <- attr(terms.formula(form), "term.labels")
+  labs <- attr(terms.formula(form, data = data), "term.labels")
   
   ns <- sapply(labs, function(x) grepl(substr(x, 1, 2), pattern = "s\\(") ) 
   if(! any(ns)) return(form)
@@ -21,11 +21,11 @@ make_mboostform <- function(formula)
   return(as.formula(rform))
 }
 
-add_bolsform <-  function(formula)
+add_bolsform <-  function(formula, data = NULL)
 {
   
   form <- as.formula(formula)
-  labs <- attr(terms.formula(form), "term.labels")
+  labs <- attr(terms.formula(form, data = data), "term.labels")
   ns <- sapply(labs, function(x) grepl(substr(x, nchar(x)-1, nchar(x)), 
                                                     pattern = ")") ) 
   if(! any(ns)) return(form)

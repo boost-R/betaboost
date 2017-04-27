@@ -29,14 +29,15 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
    oformula <- formula
    labs <- attr(terms.formula(oformula, data = data), "term.labels")
    labs.phi <- ifelse(no.phi, "",  
-                      attr(terms.formula(phi.formula), "term.labels"))
+                      attr(terms.formula(phi.formula, 
+                                         data = data), "term.labels"))
      
   if(form.type[1] != "gamboost")
   {
     # check if smooth terms are included
     ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, 1, 2), pattern = "s\\(")) 
     anysmooth <- any(ns)
-    mformula <- make_mboostform(oformula)
+    mformula <- make_mboostform(oformula, data = data)
     if(!no.phi) mphi.formula <- make_mboostform(phi.formula)
   }
   if(form.type[1] == "gamboost")
@@ -45,8 +46,8 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
     ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, nchar(x)-1, nchar(x)), 
                                                       pattern = ")") ) 
     anysmooth <- any(ns)
-    mformula <- add_bolsform(oformula)
-    if(!no.phi) mphi.formula <- add_bolsform(phi.formula)
+    mformula <- add_bolsform(oformula, data = data)
+    if(!no.phi) mphi.formula <- add_bolsform(phi.formula, data = data)
   }
    
 # check if y is in range
