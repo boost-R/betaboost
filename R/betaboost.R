@@ -27,7 +27,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
    }
    # deal with formula
    oformula <- formula
-   labs <- attr(terms.formula(oformula), "term.labels")
+   labs <- attr(terms.formula(oformula, data = data), "term.labels")
    labs.phi <- ifelse(no.phi, "",  
                       attr(terms.formula(phi.formula), "term.labels"))
      
