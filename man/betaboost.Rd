@@ -9,7 +9,8 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit Bet
 \usage{
  betaboost(formula, phi.formula = NULL, data = list(), sl = 0.1,
            iterations = 100, form.type = c("gamboost", "classic"),
-           start.mu = NULL, start.phi = NULL, ...)
+           start.mu = NULL, start.phi = NULL, 
+           stabilization = c("none", "MAD", "L2"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,13 +39,16 @@ used step-length, default is 0.1
 
 \item{start.phi}{
   offset value for phi, must be >0; will be estimated from the outcome if none is specified (default). 
-  }    
+  }
+\item{stabilization}{
+governs if the negative gradient should be standardized in each boosting step. It can be either "none", "MAD" or "L2". Only applicable when besides mu also phi is modelled (extended beta regression).
+}  
   \item{...}{
 Additional arguments passed to mboost or gamboostLSS fitting functions.
   }
 }
 \details{
-A wrapper function...
+A wrapper function to fit beta regression via different boosting functions. 
 }
 \value{
 A boosting object
@@ -53,7 +57,7 @@ A boosting object
 Schmid, M., Wickler, F., Maloney, K. O., Mitchell, R., Fenske, N., & Mayr, A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
 }
 \seealso{
-\code{\link{glmboost}}
+The original function \code{\link{gamboostLSS}} and \code{\link{gamboost}} from the model-based boosting framework.
 }
 \examples{
 

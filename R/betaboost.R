@@ -6,7 +6,8 @@
 
 betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
                       iterations = 100, form.type = c("classic", "gamboost"), 
-                      start.mu = NULL, start.phi = NULL, ...)
+                      start.mu = NULL, start.phi = NULL, 
+                      stabilization = c("none", "MAD", "L2"), ...)
 {
    no.phi <- is.null(phi.formula)
    if(any(c(!is.null(start.mu), !is.null(start.phi))) 
@@ -14,8 +15,12 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
      start.mu <- NULL
      start.phi <- NULL
      warning("starting values will be ignored when only mu is modelled")
-  
-     }
+   }
+   
+   if(stabilization != "none" & no.phi){ 
+     warning("stabilization will be ignored when only mu is modelled")
+   }
+   
    
    if(any(start.mu <=0) | any(start.mu >= 1)) {
      start.mu <- NULL
@@ -78,13 +83,14 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
     obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                       phi = formula(mphi.formula)), data = data,
                        control = boost_control(mstop = iterations, nu = sl),
-                       families = BetaLSS(mu = start.mu, phi = start.phi), ...)
+                       families = BetaLSS(mu = start.mu, phi = start.phi, 
+                                          stabilization = stabilization), ...)
      }
      else{
        obj <- glmboostLSS(formula = list(mu = formula(mformula), 
                                          phi = formula(mphi.formula)), data = data,
                           control = boost_control(mstop = iterations, nu = sl),
-                          families = BetaLSS(), ...)
+                          families = BetaLSS(stabilization = stabilization), ...)
        
      }
      
@@ -97,13 +103,14 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
      obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                        phi = formula(mphi.formula)), data = data,
                         control = boost_control(mstop = iterations, nu = sl),
-                        families = BetaLSS(mu = start.mu, phi = start.phi), ...)
+                        families = BetaLSS(mu = start.mu, phi = start.phi, 
+                                           stabilization = stabilization), ...)
      }
      else{
        obj <- gamboostLSS(formula = list(mu = formula(mformula), 
                                          phi = formula(mphi.formula)), data = data,
                           control = boost_control(mstop = iterations, nu = sl),
-                          families = BetaLSS(), ...)
+                          families = BetaLSS(stabilization = stabilization), ...)
        
        
      }
