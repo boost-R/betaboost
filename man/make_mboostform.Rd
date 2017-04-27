@@ -10,13 +10,16 @@ Building mboost formulas
 Transforms 'classic' formula objects (\code{y ~ x1 + s(x2)}) to \code{mboost} formulas \code{y ~ bols(x1) + bbs(x2)}. 
 }
 \usage{
-make_mboostform(formula)
-add_bolsform(formula)
+make_mboostform(formula, data = NULL)
+add_bolsform(formula, data = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{formula}{
 formula object describing a model. 
+}
+  \item{data}{
+data set, only necessary in case of "~ ." formulas
 }
 }
 \value{

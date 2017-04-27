@@ -13,7 +13,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
       & no.phi){ 
      start.mu <- NULL
      start.phi <- NULL
-     warning("starting values will be ignroed when only mu is modelled")
+     warning("starting values will be ignored when only mu is modelled")
   
      }
    
@@ -38,7 +38,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
     ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, 1, 2), pattern = "s\\(")) 
     anysmooth <- any(ns)
     mformula <- make_mboostform(oformula, data = data)
-    if(!no.phi) mphi.formula <- make_mboostform(phi.formula)
+    if(!no.phi) mphi.formula <- make_mboostform(phi.formula, data = data)
   }
   if(form.type[1] == "gamboost")
   {
