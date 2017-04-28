@@ -4,7 +4,7 @@
 # when ~ x1 + s(x2)   -> transform -> gambooost LSS
 # when ~ bols(x1) + bbs(x2) -> gamboost LSS
 
-betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.1,
+betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.01,
                       iterations = 100, form.type = c("gamboost", "classic"), 
                       start.mu = NULL, start.phi = NULL, 
                       stabilization = c("none", "MAD", "L2"), ...)

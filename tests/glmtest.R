@@ -16,12 +16,12 @@ rm(x1,x2,x3,x4,y)
 # just modelling mu
 
 b1 <- betaboost(formula = y ~ x1 + x2, data = data, form.type = "classic",
-      iterations = 120)
+      iterations = 120, sl = 0.1)
 rb1 <- R2.betaboost(model = b1, data = data)
 b1b <- betaboost(formula = y ~ x1 + x2, data = data, form.type = "gamboost",
-                iterations = 120)
+                iterations = 120, sl = 0.1)
 b1c <- betaboost(formula = y ~ x1 + x2, data = data, 
-                 iterations = 120)
+                 iterations = 120, sl = 0.1)
 g1 <- glmboost(y ~ x1 + x2, data = data, family = BetaReg(),
                control = boost_control(mstop = 120))
 rg1 <- R2.betaboost(model = g1, data = data)
@@ -31,13 +31,13 @@ stopifnot(identical(coef(b1),coef(b1b), coef(b1c), coef(g1)))
 # now with smooth
 
 b2 <- betaboost(formula = y ~ x1 + s(x2), data = data, form.type = "classic",
-                iterations = 120)
+                iterations = 120, sl = 0.1)
 rb2 <- R2.betaboost(model = b2, data = data)
 
 b2b <- betaboost(formula = y ~ bols(x1) + bbs(x2), data = data, form.type = "gamboost",
-                 iterations = 120)
+                 iterations = 120, sl = 0.1)
 b2c <- betaboost(formula = y ~ x1 + bbs(x2), data = data, 
-                 iterations = 120)
+                 iterations = 120, sl = 0.1)
 g2 <- gamboost(y ~ bols(x1) + bbs(x2), data = data, family = BetaReg(),
                control = boost_control(mstop = 120))
 rg2 <- R2.betaboost(model = g2, data = data)
@@ -52,7 +52,7 @@ cbind(rb1, rg1, rb2, rg2)
 b3 <- betaboost(formula = y ~ x1 + x2, 
                 phi.formula = y ~ x3 + x4, 
                 data = data, form.type = "classic",
-                iterations = 120)
+                iterations = 120, sl = 0.1)
 R2.betaboost(b3, data = data)
 
 g3 <- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4), 
@@ -66,7 +66,7 @@ stopifnot(identical(coef(b3, off2int = TRUE),
 b3b <- betaboost(formula = y ~ x1 + x2, 
                 phi.formula = y ~ x3 + x4, 
                 data = data, form.type = "classic",
-                iterations = 400, method = "noncyclic")
+                iterations = 400, method = "noncyclic", sl = 0.1)
 R2.betaboost(b3, data = data)
 
 g3b<- glmboostLSS(list(mu = y ~ x1 + x2, phi = y ~ x3 + x4), 
@@ -80,7 +80,7 @@ stopifnot(identical(round(unlist(coef(b3b, off2int = TRUE)),2),
 b4 <- betaboost(formula = y ~ s(x1) + x2, 
                 phi.formula = y ~ x3 + s(x4), 
                 data = data, form.type = "classic",
-                iterations = 120)
+                iterations = 120, sl = 0.1)
 
 g4 <- gamboostLSS(list(mu = y ~ bbs(x1) + bols(x2), 
                        phi = y ~ bols(x3) + bbs(x4)), 
@@ -119,7 +119,7 @@ stopifnot(b4$mu$offset == qlogis(0.5) &
 
 # should be ignored if only mu is modelled
 b4 <- betaboost(formula = y ~ x1 + x2, start.mu = 0.1, 
-                data = data, iterations = 120)
+                data = data, iterations = 120, sl = 0.1)
 # should trigger a warning
 stopifnot(identical(coef(b1, off2int = TRUE),
   coef(b4, off2int = TRUE)))
