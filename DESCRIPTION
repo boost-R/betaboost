@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Andreas Mayr, Benjamin Hofner, Leonie Weinhold, Matthias Schmid
 Maintainer: Andreas Mayr <andreas.mayr@fau.de>
 Description: Implements beta regression for model based boosting.
-License: GPL-2
+License: GPL-3
 LazyData: TRUE
 Depends: mboost, gamboostLSS
 Suggests: gamlss.dist
