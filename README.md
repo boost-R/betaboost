@@ -1,5 +1,13 @@
 # betaboost
 
+[![Build Status (Linux)](https://travis-ci.org/boost-R/betaboost.svg?branch=master)](https://travis-ci.org/boost-R/betaboost)
+[![Build status](https://ci.appveyor.com/api/projects/status/gc0ech6kpjniqemg?svg=true)](https://ci.appveyor.com/project/boost-R/betaboost)
+[![CRAN Status Badge](http://www.r-pkg.org/badges/version/betaboost)](https://CRAN.R-project.org/package=betaboost)
+[![Coverage Status](https://coveralls.io/repos/github/boost-R/betaboost/badge.svg?branch=master)](https://coveralls.io/github/boost-R/betaboost?branch=master)
+
+[comment]: # ([![](http://cranlogs.r-pkg.org/badges/betaboost)](https://CRAN.R-project.org/package=betaboost))
+
+
 `betaboost` implements a wrapper for boosting beta regression for potentially 
 high-dimensional data. The `betaboost` packages uses the same parametrization as `betareg`
 to make results directly comparable. The underlying boosting algorithms are implemented via the 
