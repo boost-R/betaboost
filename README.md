@@ -3,7 +3,7 @@
 `betaboost` implements a wrapper for boosting beta regression for potentially 
 high-dimensional data. The `betaboost` packages uses the same parametrization as `betareg`
 to make results directly comparable. The underlying boosting algorithms are implemented via the 
-R ad-on packages `mboost` and `gamboostLSS`.
+R add-on packages `mboost` and `gamboostLSS`.
 
 ## Installation
 
