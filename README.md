@@ -5,8 +5,6 @@
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/betaboost)](https://CRAN.R-project.org/package=betaboost)
 [![Coverage Status](https://coveralls.io/repos/github/boost-R/betaboost/badge.svg?branch=master)](https://coveralls.io/github/boost-R/betaboost?branch=master)
 
-[comment]: # ([![](http://cranlogs.r-pkg.org/badges/betaboost)](https://CRAN.R-project.org/package=betaboost))
-
 
 `betaboost` implements a wrapper for boosting beta regression for potentially 
 high-dimensional data. The `betaboost` packages uses the same parametrization as `betareg`
