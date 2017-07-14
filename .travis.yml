@@ -1,0 +1,26 @@
+# Sample .travis.yml for R projects.
+#
+# See README.md for instructions, or for more configuration options,
+# see the wiki:
+#   https://github.com/craigcitro/r-travis/wiki
+
+language: r
+sudo: required
+dist: trusty
+
+repos:
+  CRAN: https://cloud.r-project.org
+
+r_github_packages:
+  - jimhester/covr
+  
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+after_success:
+  - Rscript -e 'library(covr); coveralls()'
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
