@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+IJE
+.travis.yml
+appveyor.yml
