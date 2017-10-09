@@ -4,7 +4,7 @@
 Function for boosting beta regression
 }
 \description{
-Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit BetaRegression.
+Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit beta regression.
 }
 \usage{
  betaboost(formula, phi.formula = NULL, data = list(), sl = 0.01,
@@ -15,10 +15,10 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit Bet
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{formula}{
-description of the model to be fit for location parameter.
+description of the model to be fit for location parameter (\code{mu}).
 }
   \item{phi.formula}{
-description of the model to be fit for precission parameter.
+description of the model to be fit for precision parameter (\code{phi}).
 }
   \item{data}{
 a data frame containing the variables.
@@ -27,31 +27,31 @@ a data frame containing the variables.
 number of boosting iterations to be used.
 }
   \item{sl}{
-used step-length, default is 0.01
+step-length, default is 0.01
 }
 \item{form.type}{
-  formula type: either \code{gamboost} (y ~ bols(x1) + bbs(x2)), specifying base-learners or \code{classic} (y ~ x1 + s(x2)). 
+  formula type: either \code{gamboost} (\code{y ~ bols(x1) + bbs(x2)}) using the \pkg{mboost} interface for specifying base-learners, or \code{classic} (\code{y ~ x1 + s(x2)}). 
   }
 
 \item{start.mu}{
-  offset value for mu, must be >0 and <1; will be estimated from the outcome if none is specified (default). 
+  offset value for \code{mu}, must be \eqn{> 0} and \eqn{< 1}; will be estimated from the outcome if none is specified (default). 
   }  
 
 \item{start.phi}{
-  offset value for phi, must be >0; will be estimated from the outcome if none is specified (default). 
+  offset value for \code{phi}, must be \eqn{> 0}; will be estimated from the outcome if none is specified (default). 
   }
 \item{stabilization}{
-governs if the negative gradient should be standardized in each boosting step. It can be either "none", "MAD" or "L2". Only applicable when besides mu also phi is modelled (extended beta regression).
+governs if the negative gradient should be standardized in each boosting step. It can be either \code{"none"}, \code{"MAD"} or \code{"L2"}. Only applicable when besides \code{mu} also \code{phi} is modeled (extended beta regression).
 }  
   \item{...}{
-Additional arguments passed to mboost or gamboostLSS fitting functions.
+Additional arguments passed to \pkg{mboost} or \pkg{gamboostLSS} fitting functions.
   }
 }
 \details{
 A wrapper function to fit beta regression via different boosting functions. 
 }
 \value{
-A boosting object
+A boosting object.
 }
 \references{
 Schmid, M., Wickler, F., Maloney, K. O., Mitchell, R., Fenske, N., & Mayr, A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
@@ -60,7 +60,6 @@ Schmid, M., Wickler, F., Maloney, K. O., Mitchell, R., Fenske, N., & Mayr, A. (2
 The original function \code{\link{gamboostLSS}} and \code{\link{gamboost}} from the model-based boosting framework.
 }
 \examples{
-
 require(gamlss.dist)
 # simple simulated example
 set.seed(1234)
@@ -77,10 +76,8 @@ data <- data[!data$y \%in\% c(0,1),]
 betaboost(formula = y ~ x1 + x2, data = data,
           iterations = 120)
 
-# beta regression including modeled precission parameter
+# beta regression including modeled precision parameter
 betaboost(formula = y ~ x1 + x2, 
           phi.formula = y ~ x3 + x4, 
           data = data, iterations = 120)
-
-
 }
