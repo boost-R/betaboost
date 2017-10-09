@@ -1,11 +1,16 @@
 import("mboost")
 import("gamboostLSS")
 
-
 importFrom("stats", "coef", "dnorm", "lm", "optimize", "resid",
-             "rnorm", "runif", "sd", "var",  "as.formula", "cor", "plogis", "predict", "qlogis",
-             "terms.formula")
+           "rnorm", "runif", "sd", "var",  "as.formula", "cor", 
+           "plogis", "predict", "qlogis", "terms.formula")
 
-
-
-export(BetaReg, betaboost, make_mboostform, add_bolsform, R2.betaboost, LH.betaboost)
+export(BetaReg, 
+       betaboost, 
+       make_mboostform, 
+       add_bolsform, 
+       R2.betaboost, 
+       LH.betaboost,
+       ## further mboost/gamboostLSS functions to be re-exported
+       confint.mboost)#,
+       #predict.mboost, predict.mboostLSS)
