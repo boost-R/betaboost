@@ -1,5 +1,8 @@
 \name{confint.betaboost}
 
+\alias{confint}
+\alias{confint.betaboost}
+
 \title{
   Pointwise Bootstrap Confidence Intervals
 }
@@ -7,7 +10,7 @@
   Compute pointwise bootstrap confidence intervals
 }
 \usage{
-\method{confint}{betamboost}(object, ...)
+\method{confint}{betaboost}(object, ...)
 }
 
 \arguments{
