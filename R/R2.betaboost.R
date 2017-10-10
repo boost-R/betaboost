@@ -10,36 +10,36 @@ R2.betaboost <- function(model, data, newdata = NULL){
   
   if(!any(class(model) %in% c("mboost", "mboostLSS"))) stop("no valid boosting model")
   
-
+  
   testdata <- !is.null(newdata)
   mst <- mstop(model)
   
   if(testdata) df <- newdata 
   if(!testdata) df <- data
   
-   if(any(class(model) %in% "mboost"))
-     {
-      
-      which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$response)), 
-                                      MARGIN = 2))
-      name.response <- names(data)[which.response]
-     
-       # base-model
-       model0 <- betaboost(model$response ~ 1, data = data, iterations = mst)
-       
-       # prediction
-     
-       predicted0 <-predict(model0, newdata = df, type = "link")
-       predicted1 <-predict(model,  newdata = df, type = "link")
-       predicted1r <-predict(model,  newdata = df, type = "response")
-       
-       # log-likelihoods:
-       l0 <- sum(as.numeric(LH.betaboost(phi = model0$nuisance()[[mst]], 
-                                          y = df[,name.response], f = predicted0, 
-                                          type = "link")))
-       l1 <- sum(as.numeric(LH.betaboost(phi = model$nuisance()[[mst]], 
-                                         y = df[,name.response], f = predicted1, 
-                                         type = "link")))
+  if(any(class(model) %in% "mboost"))
+  {
+    
+    which.response  <-  which(apply(data, function(x) identical(as.numeric(x), as.numeric(model$response)), 
+                                    MARGIN = 2))
+    name.response <- names(data)[which.response]
+    
+    # base-model
+    model0 <- betaboost(model$response ~ 1, data = data, iterations = mst)
+    
+    # prediction
+    
+    predicted0 <-predict(model0, newdata = df, type = "link")
+    predicted1 <-predict(model,  newdata = df, type = "link")
+    predicted1r <-predict(model,  newdata = df, type = "response")
+    
+    # log-likelihoods:
+    l0 <- sum(as.numeric(LH.betaboost(phi = model0$nuisance()[[mst]], 
+                                      y = df[,name.response], f = predicted0, 
+                                      type = "link")))
+    l1 <- sum(as.numeric(LH.betaboost(phi = model$nuisance()[[mst]], 
+                                      y = df[,name.response], f = predicted1, 
+                                      type = "link")))
   }
   
   if(any(class(model) %in% "mboostLSS"))
@@ -68,11 +68,11 @@ R2.betaboost <- function(model, data, newdata = NULL){
     
     # log-likelihoods:
     l0 <- sum(as.numeric(LH.betaboost(phi = phi0, 
-                                       y = df[,name.response], f = predicted0, 
-                                       type = "response")))
+                                      y = df[,name.response], f = predicted0, 
+                                      type = "response")))
     l1 <- sum(as.numeric(LH.betaboost(phi = phi0, 
-                                       y = df[,name.response], f = predicted1, 
-                                       type = "response")))
+                                      y = df[,name.response], f = predicted1, 
+                                      type = "response")))
   }  
   
   
@@ -96,6 +96,6 @@ LH.betaboost <- function(phi, y, f, type = c("link", "response")) {
   
   
   (lgamma(phi) - lgamma(plogis(f) * phi) - 
-    lgamma((1 - plogis(f)) * phi) + (plogis(f) * phi - 1) * log(y) + 
-    ((1 - plogis(f)) * phi - 1) * log(1 - y))
+      lgamma((1 - plogis(f)) * phi) + (plogis(f) * phi - 1) * log(y) + 
+      ((1 - plogis(f)) * phi - 1) * log(1 - y))
 }

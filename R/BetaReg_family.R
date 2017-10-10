@@ -9,9 +9,9 @@
 
 
 BetaReg <- function(mu = NULL, phirange =  c(.001, 1000)){
-
+  
   phi <- 1 # just to initialize, overwritten in first step
-
+  
   # loss is negative log likelihood; f is additive predictor (eta)
   # logit link -> plogis(f) = mu
   loss_mu <- function(phi, y, f) {
@@ -23,12 +23,12 @@ BetaReg <- function(mu = NULL, phirange =  c(.001, 1000)){
   risk_phi <- function(phi, y, fit, w = 1) {
     sum(w * loss_mu(y = y, f = fit, phi = phi))
   }
-
+  
   # for output
   risk <- function( y, f, w = 1) {
     sum(w * loss_mu(y = y, f = f, phi = phi))
   }
-
+  
   # ngradient is first derivative of log likelihood w.r.t. f
   ngradient <- function(y, f, w = 1) {
     # estimate phi
@@ -51,13 +51,13 @@ BetaReg <- function(mu = NULL, phirange =  c(.001, 1000)){
   }
   # use the Family constructor of mboost
   mboost::Family(ngradient = ngradient, risk = risk, offset = offset,
-                  response = function(f) plogis(f),
-                  check_y <- function(y) {
-                    if (!is.numeric(y) || !is.null(dim(y)))
-                      stop("response must be a numeric vector")
-                    if (any(y <= 0) | any(y >= 1))
-                      stop("response must be >0 and <1")
-                    y
-                  },nuisance = function() return(phi[length(phi)]),
-                  name = "Beta-Regression (logit link)")
+                 response = function(f) plogis(f),
+                 check_y <- function(y) {
+                   if (!is.numeric(y) || !is.null(dim(y)))
+                     stop("response must be a numeric vector")
+                   if (any(y <= 0) | any(y >= 1))
+                     stop("response must be >0 and <1")
+                   y
+                 },nuisance = function() return(phi[length(phi)]),
+                 name = "Beta-Regression (logit link)")
 }
