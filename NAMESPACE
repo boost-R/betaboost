@@ -12,5 +12,7 @@ export(BetaReg,
        R2.betaboost, 
        LH.betaboost,
        ## further mboost/gamboostLSS functions to be re-exported
-       confint.mboost)#,
+       confint.betaboost)#,
        #predict.mboost, predict.mboostLSS)
+
+S3method(confint, betaboost)
