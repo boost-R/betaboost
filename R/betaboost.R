@@ -115,6 +115,7 @@ betaboost <- function(formula, phi.formula = NULL, data = list(), sl = 0.01,
     }
   }
   
+  class(obj) <- c("betaboost", class(obj))
   return(obj)
 }
 
