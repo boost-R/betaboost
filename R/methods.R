@@ -6,6 +6,8 @@ confint.betaboost <- function(object, ...) {
   NextMethod("confint", object)
 }
 
-#predict.betaboost <- function(object, ...) {
-#  object
-#}
+predict.betaboost <- function(object, newdata = NULL,
+                              type = c("link", "response", "class"), which = NULL,
+                              aggregate = c("sum", "cumsum", "none"), ...) {
+  NextMethod("predict", object)
+}
