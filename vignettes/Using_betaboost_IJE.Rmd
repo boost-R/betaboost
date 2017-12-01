@@ -1,13 +1,27 @@
-#
-# Appendix 
+---
+title: "The betaboost package – a software tool for modeling bounded outcome variables in potentially high-dimensional epidemiological data -- Appendix"
+author: "Andreas Mayr, Leonie Weinhold, Benjamin Hofner, Stephanie Titze, Olaf Gefeller, Matthias Schmid"
+date: ""
+output:
+  html_document:
+    keep_md: yes
+---
 
+<!--
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Using papeR with Markdown}
+-->
 
+```{r initialization, eval = FALSE}
 ## Install package
 install.packages("devtools")         ## needed to install from github
 library("devtools")                  ## load devtools
 install_github("boost-R/mboost")     ## install newest mboost version
 install_github("boost-R/gamboostLSS")## install newest gamboostLSS version
 install_github("boost-R/betaboost")  ## install betaboost
+```
+
+```{r run_example_code}
 library("betaboost")                 ## load betaboost
 
 #-------------------------------------------------------------------
@@ -139,5 +153,4 @@ rbind("betareg" = coef(beta1),
 
 ## converges to same results
 plot(beta2, off2int = TRUE, main = "boosting")
-
-
+```
