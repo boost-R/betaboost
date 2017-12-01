@@ -14,6 +14,9 @@ install:
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github boost-R/mboost
+  - travis-tool.sh install_github boost-R/gamboostLSS
+
 
 test_script:
   - travis-tool.sh run_tests
