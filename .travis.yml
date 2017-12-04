@@ -12,6 +12,8 @@ repos:
   CRAN: https://cloud.r-project.org
 
 r_github_packages:
+  - boost-R/mboost
+  - boost-R/gamboostLSS
   - jimhester/covr
   
 after_failure:
