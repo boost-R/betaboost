@@ -11,3 +11,4 @@ License: GPL-3
 LazyData: TRUE
 Depends: mboost, gamboostLSS
 Suggests: gamlss.dist, knitr, rmarkdown, QoLR, betareg
+VignetteBuilder: knitr

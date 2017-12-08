@@ -1,5 +1,5 @@
 ---
-title: "The betaboost package – a software tool for modeling bounded outcome variables in potentially high-dimensional epidemiological data -- Appendix"
+title: "The betaboost package: A software tool for modeling bounded outcome variables in potentially high-dimensional epidemiological data -- Appendix"
 author: "Andreas Mayr, Leonie Weinhold, Benjamin Hofner, Stephanie Titze, Olaf Gefeller, Matthias Schmid"
 date: ""
 output:
@@ -9,7 +9,7 @@ output:
 
 <!--
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Using papeR with Markdown}
+  %\VignetteIndexEntry{Using package betaboost}
 -->
 
 ## Preparations and initialisation
