@@ -29,7 +29,8 @@ library("betaboost")                 ## load betaboost
 
 ## Example 1: Comparison of various boosted models
 
-We load the QOL (quality of life) data set `dataqol2` and pre-process the data:
+First, we analyse publicly available data on health-realated quality of life of 60 patients. The data set is available as `dataqol2` in the `QoLR` package. The explanatory variables are the treatment group (`arm`) and an additional score measuring the patients `pain`. First, we load and preprocess the data:
+
 ```{r load_data}
 ## load data
 data("dataqol2", package = "QoLR")
