@@ -58,7 +58,6 @@ lines(density(dataqol$QoL), col = 2, lwd = 2)
 ```
 
 The influence of various predictors on the outcome is depicted in the following: First, boxplots comparing the Quality of Life outcome for both treatment arms. Second, a scatterplot for the relationship between the explanatory variable `pain` (x-axis) and the outcome variable (y-axis).
-
 ```{r outcome by predictor variables}
 ## QOL by treatment arm
 boxplot(QoL ~ arm, data = dataqol, names = c("A","B"), las = 1,
@@ -75,10 +74,11 @@ First, we fit a classical beta regression with linear effects
 beta1 <- betaboost(QoL ~ pain + arm, data = dataqol)
 coef(beta1, off2int = TRUE)
 ```
-the precission parameter is treated as nuissance
+the precission parameter is treated as nuissance. 
 ```{r}
 nuisance(beta1)
 ```
+Note, that here we automatically 100 boosting iterations `mstop = 100`, as this is the default value. 
 
 Similarly, we can fit a model with smooth effect for pain
 ```{r}
