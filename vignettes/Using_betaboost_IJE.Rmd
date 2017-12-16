@@ -50,18 +50,22 @@ observations.
 str(dataqol)
 ``` 
 
-The raw outcome is distributed as follows (histogram of the Quality of Life with smooth kernel density estimate).
+The raw outcome is distributed as follows (histogram of the Quality of Life with smooth kernel density estimate for its empirical distribution).
 ```{r outcome}
 hist(dataqol$QoL, breaks = 20, col = "lightgrey", 
      main = "Quality of life", prob = TRUE, las = 1)
 lines(density(dataqol$QoL), col = 2, lwd = 2)
 ```
 
-The influence of various predictors on the outcome is depicted in the following: First, boxplots comparing the Quality of Life outcome for both treatment arms. Second, a scatterplot for the relationship between the explanatory variable `pain` (x-axis) and the outcome variable (y-axis).
-```{r outcome by predictor variables}
+The influence of various predictors on the outcome is depicted in the following: First, boxplots comparing the Quality of Life outcome for both treatment arms. 
+```{r outcome by predictor variables I}
 ## QOL by treatment arm
 boxplot(QoL ~ arm, data = dataqol, names = c("A","B"), las = 1,
         col = "lightgrey", ylab = "Qualitiy of life")
+```
+
+Second, a scatterplot for the relationship between the explanatory variable `pain` (x-axis) and the outcome variable (y-axis):
+```{r outcome by predictor variables II}
 ## QOL by pain
 plot(QoL ~ pain, data = dataqol, pch = 19, las = 1)
 abline(lm(QoL ~ pain, data = dataqol))
@@ -78,28 +82,34 @@ the precission parameter is treated as nuissance.
 ```{r}
 nuisance(beta1)
 ```
-Note, that here we automatically 100 boosting iterations `mstop = 100`, as this is the default value. 
+Note, that here we automatically are using 100 boosting iterations `mstop = 100`, as this is the default value. 
 
-Similarly, we can fit a model with smooth effect for pain
+Similarly, we can fit a model with smooth effect for `pain`
 ```{r}
 beta2 <- betaboost(QoL ~ s(pain) + arm, data = dataqol, 
                    form.type = "classic")
 ```
-and plot partial smooth effect
+and plot the corresponding partial smooth effect for the explanatory variable `pain` on the outcome `QoL`.
 ```{r}
 plot(beta2, which = "pain")
 ```
 
-As for all boosting methods, we need to tune the model (via cross-validation). 
+As for all boosting methods, we need to tune the model regarding the number of boosting iterations `mstop` via cross-validation or bootstrap procuedures which are implemented in `cvrisk()`. Note that the function uses 25-fold bootstrap per default. 
+
 This takes a few seconds.
 ```{r}
 set.seed(1234)
 cvr <- cvrisk(beta2)
-## exract optimal boosting iteration as determined via cross-validation
+## extract optimal boosting iteration as determined via cvrisk
 mstop(cvr)
-## and plot the cross-validated risk over the iterations
+## and plot the predictive risk (on out-of-bag observations) over the iterations
 plot(cvr)
-## set to optimal stopping iterations
+```
+
+The plot displays results from 25-fold bootstrap to optimize the number of boosting iterations. The gray lines indicate the performance (regarding predictive risk) for the 25 bootstrap samples. The solid black line represents the average performance; the optimal performance (minimal risk) is reached after 10 iterations (dashed vertical line). 
+
+```{r}
+## set model to optimal stopping iteration:
 mstop(beta2) <- mstop(cvr)
 ```
 Of note, `pain` is no longer selected:
@@ -107,8 +117,8 @@ Of note, `pain` is no longer selected:
 coef(beta2)
 ```
 
-Now, we fit an extended beta regression model, where the precision parameter is 
-modeled as well
+Now, we fit an extended beta regression model, where the precision parameter `phi` is 
+modeled as well. This is achieved by additionally providing a `phi.formula`:
 ```{r}
 beta3 <- betaboost(QoL ~ arm + pain, 
                    phi.formula = QoL ~ arm + pain, 
