@@ -106,13 +106,15 @@ mstop(cvr)
 plot(cvr)
 ```
 
-The plot displays results from 25-fold bootstrap to optimize the number of boosting iterations. The gray lines indicate the performance (regarding predictive risk) for the 25 bootstrap samples. The solid black line represents the average performance; the optimal performance (minimal risk) is reached after 10 iterations (dashed vertical line). 
+The plot displays results from 25-fold bootstrap to optimize the number of boosting iterations. The gray lines indicate the performance (regarding predictive risk) for the 25 bootstrap samples. The solid black line represents the average performance; the optimal performance (minimal risk) is reached after 10 iterations (dashed vertical line).  
+
+Afterwards, we set the model to the optimal iteration:
 
 ```{r}
 ## set model to optimal stopping iteration:
 mstop(beta2) <- mstop(cvr)
 ```
-Of note, `pain` is no longer selected:
+As a result of early stopping, variable selection takes place and `pain` is no longer included in the final model:
 ```{r}
 coef(beta2)
 ```
@@ -146,19 +148,20 @@ cbind("lin" = R2.betaboost(beta1, data = dataqol),
 
 ## Example 2: Comparison of `betareg` and `betaboost`
 
+The second data set is a standard example for beta regression. The outcome is the proportion of income spent on food for a random sample of 38 households in a large US city. The data set is freely available and included in the `betareg` package.
 ```{r init, warning=FALSE, message=FALSE}
 ## load betareg and data
 library(betareg)
 data(FoodExpenditure)
 ``` 
 
-First, we fit the standard beta regression model to the data
+First, we fit the standard beta regression model to the data with `betareg`:
 ```{r}
 beta1 <- betareg(I(food/income) ~ income + persons, 
                  data = FoodExpenditure)
 ```
 
-Now, we fit a boosted beta regression model
+Now, we fit a boosted beta regression model with `betaboost`:
 ```{r}
 beta2 <- betaboost(I(food/income) ~ income + persons, 
                    data = FoodExpenditure)
@@ -171,7 +174,7 @@ rbind("betareg" = coef(beta1),
                       nuisance(beta2)))
 ```
 we see that there are only minor differences. If we increase the number of boosting
-iterations, we converge to the standard solution:
+iterations to 500 iterations,  the boosting model converges to the standard solution of `betareg`:
 ```{r}
 mstop(beta2) <- 500
 ## compare again
@@ -179,8 +182,8 @@ rbind("betareg" = coef(beta1),
       "betaboost" = c(coef(beta2, off2int = TRUE), 
                       nuisance(beta2)))
 ```
-As we see from the following plot, changes in the coefficients were very slow after the
-first 100 boosting iterations:
+
+The following graphic is a coefficient plot for 500 boosting iterations (coefficient estimates on the y-axis and number of boosting iteration on the x axis). One can observe how the algorithm rapidly converges to the same effect estimates as those obtained from the standard software `betareg`. In fact, after the first 100 boosting iterations there are only minor changes in the coefficients :
 ```{r}
 plot(beta2, off2int = TRUE, main = "boosting")
 ```
