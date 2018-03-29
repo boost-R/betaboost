@@ -10,7 +10,9 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit bet
  betaboost(formula, phi.formula = NULL, data = list(), sl = 0.01,
            iterations = 100, form.type = c("gamboost", "classic"),
            start.mu = NULL, start.phi = NULL, 
-           stabilization = c("none", "MAD", "L2"), ...)
+           stabilization = c("none", "MAD", "L2"), 
+           y = NULL, x = NULL, mat.parameter = c("mean", "both"), 
+           mat.effect = c("linear", "smooth"),    ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -43,6 +45,19 @@ step-length, default is 0.01
 \item{stabilization}{
 governs if the negative gradient should be standardized in each boosting step. It can be either \code{"none"}, \code{"MAD"} or \code{"L2"}. Only applicable when besides \code{mu} also \code{phi} is modeled (extended beta regression).
 }  
+\item{y}{
+response vector when no \code{formula} is specified.
+}
+\item{x}{
+matrix of explanatory variables when no \code{formula} is specfied, per default they are included as linear effects: can be changed to smooth via \code{mat.effects}.
+}
+\item{mat.effects}{
+controls what type of effect the entries in matrix \code{x} have on the response. It can be either \code{linear} or \code{smooth}, while linear is the default. Only applicable if no \code{formula} is provided, but \code{y} and \code{x}.
+}
+
+\item{mat.parameter}{
+controls for which parameters the entries in matrix \code{x} are included. It can be either \code{mean} (classical beta regression) or \code{both} (extended beta regression), while mean is the default. Only applicable if no \code{formula} is provided, but \code{y} and \code{x}.
+}
   \item{...}{
 Additional arguments passed to \pkg{mboost} or \pkg{gamboostLSS} fitting functions.
   }
