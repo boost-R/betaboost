@@ -7,7 +7,9 @@
 betaboost <- function(formula = NULL, phi.formula = NULL, data = list(), sl = 0.01,
                       iterations = 100, form.type = c("gamboost", "classic"), 
                       start.mu = NULL, start.phi = NULL, 
-                      stabilization = c("none", "MAD", "L2"), ...)
+                      stabilization = c("none", "MAD", "L2"),
+                      y = NULL, x = NULL, mat.parameter = c("mean", "both"), 
+                      mat.effect = c("linear", "smooth"), ...)
 {
   no.phi <- is.null(phi.formula)
   if(any(c(!is.null(start.mu), !is.null(start.phi))) 
@@ -21,6 +23,19 @@ betaboost <- function(formula = NULL, phi.formula = NULL, data = list(), sl = 0.
     warning("stabilization will be ignored when only mu is modelled")
   }
   
+  if(is.null(formula) & (is.null(x) | is.null(y))){
+    stop("if no formula is provided, y and x must be specified")
+  }
+  
+  if(!is.null(formula) & (!is.null(x) | !is.null(y))){
+    y <- NULL
+    x <- NULL
+    warning("if formula is provided, y and x will be ingored")
+  }
+  if(!is.null(x) & !is.matrix(x)){
+    x <- as.matrix(x)
+  }
+    
   
   if(any(start.mu <=0) | any(start.mu >= 1)) {
     start.mu <- NULL
@@ -31,13 +46,51 @@ betaboost <- function(formula = NULL, phi.formula = NULL, data = list(), sl = 0.
     warning("start.phi must be >0 !; will be ignored")
   }
   # deal with formula
+  if(!is.null(formula)){
   oformula <- formula
   labs <- attr(terms.formula(oformula, data = data), "term.labels")
   labs.phi <- ifelse(no.phi, "",  
                      attr(terms.formula(phi.formula, 
                                         data = data), "term.labels"))
+  }else{
+    if(mat.effect[1] == "linear"){
+      if(mat.parameter[1] == "mean"){
+    obj <- glmboost(y = y, x = cbind("intercept" = rep(1, nrow(x)), x), 
+                    control = boost_control(mstop = iterations, nu = sl),
+                    family = BetaReg(), ...)}
+      if(mat.parameter[1] == "both"){
+        dat <- as.data.frame(cbind(y, x))
+        mformula <- paste(paste(names(dat)[1], " ~ ", sep = ""), 
+                          paste(names(dat)[-1], collapse = " + "))
+        obj <- glmboostLSS(formula = as.formula(mformula), data = dat,
+                        control = boost_control(mstop = iterations, nu = sl),
+                        families = BetaLSS())
+        }
+      }
+  if(mat.effect[1] == "smooth"){
+      if(mat.parameter[1] == "mean"){
+        dat <- as.data.frame(cbind(y, x))
+        mformula <- paste(paste(names(dat)[1], " ~ ", sep = ""), 
+                          paste(names(dat)[-1], collapse = " + "))
+        obj <- gamboost(formula = as.formula(mformula), data = dat, 
+                    control = boost_control(mstop = iterations, nu = sl),
+                    family = BetaReg(), ...)}
+      if(mat.parameter[1] == "both"){
+        dat <- as.data.frame(cbind(y, x))
+        mformula <- paste(paste(names(dat)[1], " ~ ", sep = ""), 
+                          paste(names(dat)[-1], collapse = " + "))
+        obj <- gamboostLSS(formula = as.formula(mformula), data = dat,
+                        control = boost_control(mstop = iterations, nu = sl),
+                        families = BetaLSS())
+        }
+      }
+    
+  class(obj) <- c("betaboost", class(obj))
+  return(obj)  
+    
+  }  
   
-  if(form.type[1] != "gamboost")
+    if(form.type[1] != "gamboost")
   {
     # check if smooth terms are included
     ns <- sapply(c(labs, labs.phi), function(x) grepl(substr(x, 1, 2), pattern = "s\\(")) 

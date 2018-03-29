@@ -125,6 +125,39 @@ stopifnot(identical(coef(b1, off2int = TRUE),
   coef(b4, off2int = TRUE)))
 
 
+## matrix interface: linear
+
+
+b5 <- betaboost(formula = NULL, data = data, form.type = "classic",
+                iterations = 120, sl = 0.1, y= data$y, x = data$x1, mat.effect = "linear")
+g5 <- glmboost(y ~ x1, data = data, control = boost_control(mstop = 120), 
+               family = BetaReg())
+stopifnot(identical(as.numeric(coef(b5)), as.numeric(coef(g5))))
+b6 <- betaboost(formula = NULL, data = data, form.type = "classic",
+                iterations = 120, sl = 0.1, y= data$y, x = data$x1, 
+                mat.effect = "linear", mat.parameter = "both")
+g6 <- glmboostLSS(y ~x1, data = data, control = boost_control(mstop = 120), 
+                  families = BetaLSS())
+stopifnot(identical(as.numeric(unlist(coef(g6))), as.numeric(unlist(coef(b6)))))
+
+
+## matrix interface: nonlinear
+
+b7 <- betaboost(formula = NULL, data = data, form.type = "classic", mat.parameter = "mean",
+                iterations = 120, sl = 0.1, y= data$y, x = data$x1, mat.effect = "smooth")
+g7 <- gamboost(y ~ x1, data = data, control = boost_control(mstop = 120), 
+               family = BetaReg())
+stopifnot(identical(as.numeric(unlist(coef(b7))), as.numeric(unlist(coef(g7)))))
+b8 <- betaboost(formula = NULL, data = data, form.type = "classic",
+                iterations = 120, sl = 0.1, y= data$y, x = data$x1, 
+                mat.effect = "smooth", mat.parameter = "both")
+g8 <- gamboostLSS(y ~x1, data = data, control = boost_control(mstop = 120), 
+                  families = BetaLSS())
+stopifnot(identical(as.numeric(unlist(coef(g8))), as.numeric(unlist(coef(b8)))))
+
+
+
+
 # Errors 
 try(betaboost(formula = y ~ x1, phi.formula = x1 ~ x2, 
          data = data))
