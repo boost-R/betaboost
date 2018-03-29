@@ -7,7 +7,7 @@ Function for boosting beta regression
 Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit beta regression.
 }
 \usage{
- betaboost(formula, phi.formula = NULL, data = list(), sl = 0.01,
+ betaboost(formula = NULL, phi.formula = NULL, data = list(), sl = 0.01,
            iterations = 100, form.type = c("gamboost", "classic"),
            start.mu = NULL, start.phi = NULL, 
            stabilization = c("none", "MAD", "L2"), 
@@ -51,7 +51,7 @@ response vector when no \code{formula} is specified.
 \item{x}{
 matrix of explanatory variables when no \code{formula} is specfied, per default they are included as linear effects: can be changed to smooth via \code{mat.effects}.
 }
-\item{mat.effects}{
+\item{mat.effect}{
 controls what type of effect the entries in matrix \code{x} have on the response. It can be either \code{linear} or \code{smooth}, while linear is the default. Only applicable if no \code{formula} is provided, but \code{y} and \code{x}.
 }
 
