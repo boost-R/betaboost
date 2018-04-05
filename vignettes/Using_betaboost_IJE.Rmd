@@ -89,10 +89,12 @@ Similarly, we can fit a model with smooth effect for `pain`
 beta2 <- betaboost(QoL ~ s(pain) + arm, data = dataqol, 
                    form.type = "classic")
 ```
-and plot the corresponding partial smooth effect for the explanatory variable `pain` on the outcome `QoL`.
+and plot the corresponding smooth effect for the explanatory variable `pain` on the outcome `QoL`.
 ```{r}
 plot(beta2, which = "pain")
 ```
+
+The effect represents the estimate f(`pain`) evaluated at the different observations. This effect does not vary with other variables, but depends only on the `pain` value.
 
 As for all boosting methods, we need to tune the model regarding the number of boosting iterations `mstop` via cross-validation or bootstrap procuedures which are implemented in `cvrisk()`. Note that the function uses 25-fold bootstrap per default. 
 
@@ -136,6 +138,8 @@ beta4 <- betaboost(QoL ~ arm + s(pain),
 par(mfrow = c(1,2))
 plot(beta4, which =  "pain")
 ```
+
+Now, we get two plots: The smooth effect of the pain variable on the mean parameter `mu` (left) and the precision parameter `\phi` (right) in an extended beta regression model for the Quality of Life outcome. The curves represent the estimates for f(`pain`) in the two parameter models, evaluated at the different observations and hence depend only on the `pain` value. 
 
 ### Compare R$^2$ measures for the four boosting models
 
