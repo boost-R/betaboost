@@ -88,11 +88,24 @@ data <- data.frame(y ,x1, x2, x3, x4)
 data <- data[!data$y \%in\% c(0,1),]
 
 # 'classic' beta regression
-betaboost(formula = y ~ x1 + x2, data = data,
-          iterations = 120)
+b1 <- betaboost(formula = y ~ x1 + x2, data = data,
+                iterations = 120)
+coef(b1)
 
 # beta regression including modeled precision parameter
-betaboost(formula = y ~ x1 + x2, 
-          phi.formula = y ~ x3 + x4, 
-          data = data, iterations = 120)
+b2 <- betaboost(formula = y ~ x1 + x2, 
+                phi.formula = y ~ x3 + x4, 
+                data = data, iterations = 120)
+
+
+# with smooth effects for x1 and x3
+b3 <- betaboost(formula = y ~ s(x1) + x2, 
+                phi.formula = y ~ s(x3) + x4, form.type = "classic",
+                data = data, iterations = 120)          
+
+
+# using matrix interface
+b4 <- betaboost(y = data$y, x = data[,2:5], iterations = 200, 
+                mat.parameter = "both")          
+
 }
