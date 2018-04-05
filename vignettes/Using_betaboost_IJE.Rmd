@@ -141,6 +141,25 @@ plot(beta4, which =  "pain")
 
 Now, we get two plots: The smooth effect of the pain variable on the mean parameter `mu` (left) and the precision parameter `\phi` (right) in an extended beta regression model for the Quality of Life outcome. The curves represent the estimates for f(`pain`) in the two parameter models, evaluated at the different observations and hence depend only on the `pain` value. 
 
+### Predictions
+
+We can also use look at the fitted values or predict new observations 
+
+```{r}
+# fitted values
+preds <- predict(beta4, type = "response")
+summary(cbind(preds$mu, preds$ph))
+```
+
+
+```{r}
+# predictions for two new obs from the two treatment arms
+predict(beta3, newdata = data.frame(pain = c(0.3, 0.3), arm = c(0,.01)), 
+                 type = "response")
+```
+
+As `arm` was not selected for the precision part of the model, only `mu` is influenced by the treatment arm, `phi` stays the same.
+
 ### Compare R$^2$ measures for the four boosting models
 
 ```{r}
@@ -149,6 +168,9 @@ cbind("lin" = R2.betaboost(beta1, data = dataqol),
       "ext. lin" = R2.betaboost(beta3, data = dataqol),
       "ext. smooth" = R2.betaboost(beta4, data = dataqol))
 ```
+
+
+
 
 ## Example 2: Comparison of `betareg` and `betaboost`
 
