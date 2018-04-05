@@ -187,3 +187,23 @@ The following graphic is a coefficient plot for 500 boosting iterations (coeffic
 ```{r}
 plot(beta2, off2int = TRUE, main = "boosting")
 ```
+
+Note that `betaboost` incorporates additionally also a matrix interface, which is particularly advantageous in case of larger or even high-dimensional models. Instead of using the formula interface, the user only needs to provide the response `y` and a matrix `x`. Via `mat.parameter = c("mean","both")` and `mat.effect = c("linear","smooth")` the user can specify weather to apply classical or extended beta regression, and if linear or non-linear effects are assumed. 
+
+```{r}
+## Fit same model than beta2 but via matrix interface
+beta2b <- betaboost(y = FoodExpenditure$food/FoodExpenditure$income, 
+                    x = cbind(FoodExpenditure$income, FoodExpenditure$persons),
+                    iterations = 500)
+coef(beta2b)
+```
+
+
+```{r}
+## Now extended beta regression
+beta2c <- betaboost(y = FoodExpenditure$food/FoodExpenditure$income, 
+                    x = cbind(income = FoodExpenditure$income, persons = FoodExpenditure$persons),
+                    iterations = 500, mat.parameter = "both", 
+                    mat.effect = "linear")
+coef(beta2c)
+```
