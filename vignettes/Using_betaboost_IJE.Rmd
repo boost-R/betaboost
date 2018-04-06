@@ -148,7 +148,7 @@ We can also look at the fitted values or predict new observations:
 ```{r}
 # fitted values
 preds <- predict(beta4, type = "response")
-summary(cbind(preds$mu, preds$ph))
+summary(cbind(preds$mu, preds$phi))
 ```
 
 
