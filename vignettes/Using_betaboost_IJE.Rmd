@@ -143,7 +143,7 @@ Now, we get two plots: The smooth effect of the pain variable on the mean parame
 
 ### Predictions
 
-We can also use look at the fitted values or predict new observations 
+We can also look at the fitted values or predict new observations: 
 
 ```{r}
 # fitted values
