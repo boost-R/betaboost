@@ -39,7 +39,7 @@ dataqol <- dataqol2[dataqol2$time ==0,]
 ## remove missings
 dataqol <- dataqol[complete.cases(dataqol[,c("QoL", "arm", "pain")]),]
 ## rescale outcome to [0,1]
-dataqol <- dataqol/100
+dataqol$QoL <- dataqol$QoL/100
 ```
 
 ### Raw data
@@ -154,7 +154,7 @@ summary(cbind(preds$mu, preds$ph))
 
 ```{r}
 # predictions for two new obs from the two treatment arms
-predict(beta3, newdata = data.frame(pain = c(0.3, 0.3), arm = c(0,.01)), 
+predict(beta3, newdata = data.frame(pain = c(30, 30), arm = c(0,1)), 
                  type = "response")
 ```
 
