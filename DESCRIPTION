@@ -10,5 +10,5 @@ Description:  Implements boosting beta regression for potentially high-dimension
 License: GPL-3
 LazyData: TRUE
 Depends: mboost, gamboostLSS
-Suggests: gamlss.dist, knitr, rmarkdown, QoLR, betareg
+Suggests: gamlss.dist, knitr, rmarkdown, betareg
 VignetteBuilder: knitr
