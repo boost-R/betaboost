@@ -176,6 +176,23 @@ g10 <- gamboostLSS(y ~x1 + x2 + x3, data = data, control = boost_control(mstop =
                   families = BetaLSS())
 stopifnot(identical(as.numeric(unlist(coef(g10))), as.numeric(unlist(coef(b10)))))
 
+##-------- data test
+# check if dataset loads
+
+data(dataqol2)
+## take one time-point
+dataqol <- dataqol2[dataqol2$time ==0,]
+## remove missings
+dataqol <- dataqol[complete.cases(dataqol[,c("QoL", "arm", "pain")]),]
+## rescale outcome to [0,1]
+dataqol$QoL <- dataqol$QoL/100
+
+
+# fit simple model
+beta1 <- betaboost(QoL ~ pain + arm, data = dataqol)
+coef(beta1, off2int = TRUE)
+
+#------------------
 
 
 
