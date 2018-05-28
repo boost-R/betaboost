@@ -69,7 +69,9 @@ A wrapper function to fit beta regression via different boosting functions.
 A boosting object.
 }
 \references{
-Schmid, M., Wickler, F., Maloney, K. O., Mitchell, R., Fenske, N., & Mayr, A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
+Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package – a software tool for modeling bounded outcome variables in potentially high-dimensional epidemiological data. International Journal of Epidemiology. 
+
+Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, & Mayr A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
 }
 \seealso{
 The original function \code{\link{gamboostLSS}} and \code{\link{gamboost}} from the model-based boosting framework.
