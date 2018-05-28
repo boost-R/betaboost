@@ -58,14 +58,14 @@ lines(density(dataqol$QoL), col = 2, lwd = 2)
 ```
 
 The influence of various predictors on the outcome is depicted in the following: First, boxplots comparing the Quality of Life outcome for both treatment arms. 
-```{r outcome by predictor variables I}
+```{r}
 ## QOL by treatment arm
 boxplot(QoL ~ arm, data = dataqol, names = c("A","B"), las = 1,
         col = "lightgrey", ylab = "Qualitiy of life")
 ```
 
 Second, a scatterplot for the relationship between the explanatory variable `pain` (x-axis) and the outcome variable (y-axis):
-```{r outcome by predictor variables II}
+```{r}
 ## QOL by pain
 plot(QoL ~ pain, data = dataqol, pch = 19, las = 1)
 abline(lm(QoL ~ pain, data = dataqol))

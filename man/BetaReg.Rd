@@ -45,15 +45,12 @@ b2 <- glmboost(y ~ x1  + x2, data = data, family = BetaReg())
 coef(b2)
 
 # different values due to different defaults for step length and mstop
-# However, they converge to the same results:
 
-coef(b1[5000]) # set to 5000 iterations
-coef(b2[1000]) # set to 1000 iterations
 
 # same model with mboost
 b3 <- glmboost(y ~ x1  + x2, data = data, family = BetaReg(), 
                control = boost_control(mstop = 120, nu = 0.01))
 coef(b3)
-coef(b1[120])
+coef(b1)
 
 }
