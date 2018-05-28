@@ -20,7 +20,7 @@ BetaReg(mu = NULL, phirange =  c(.001, 1000))
 \references{
 Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package – a software tool for modeling bounded outcome variables in potentially high-dimensional epidemiological data. International Journal of Epidemiology. 
 
-Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, & Mayr A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
+Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, \& Mayr A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
 }
 \examples{
 require(gamlss.dist)
