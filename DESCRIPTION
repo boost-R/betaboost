@@ -1,7 +1,7 @@
 Package: betaboost
 Type: Package
 Title: Boosting Beta Regression
-Version: 0.1.0
+Version: 1.0.0
 Author: Andreas Mayr, Benjamin Hofner, Leonie Weinhold, Matthias Schmid
 Maintainer: Andreas Mayr <mayr@uni-bonn.de>
 Description:  Implements boosting beta regression for potentially high-dimensional data. 
