@@ -187,11 +187,17 @@ dataqol <- dataqol[complete.cases(dataqol[,c("QoL", "arm", "pain")]),]
 ## rescale outcome to [0,1]
 dataqol$QoL <- dataqol$QoL/100
 
+data(QoLdata)
+identical(dataqol, QoLdata )
+
 
 # fit simple model
 beta1 <- betaboost(QoL ~ pain + arm, data = dataqol)
 coef(beta1, off2int = TRUE)
 
+beta2 <- betaboost(QoL ~ pain + arm, data = QoLdata)
+coef(beta2, off2int = TRUE)
+stopifnot(identical(coef(beta1), coef(beta2)))
 #------------------
 
 
