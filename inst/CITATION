@@ -23,7 +23,7 @@ citEntry(
 
 citEntry(
   entry="Article",
-  title = "The betaboost package—a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data",
+  title = "The betaboost package - a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data",
   author   =  personList(as.person("Andreas Mayr"),
                          as.person("Leonie Weinhold"),
                          as.person("Benjamin Hofner"),
@@ -37,8 +37,8 @@ citEntry(
   doi	   =  "https://doi.org/10.1093/ije/dyy093",
   header   = "To cite 'betaboost' in publications, please use:",
   textVersion =
-    paste("A. Mayr, L. Weinhold,B. Hofner, S. Titze, O. Gefeller and M. Schmid (2018).",
-          "The betaboost package—a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data.",
+    paste("A. Mayr, L. Weinhold, B. Hofner, S. Titze, O. Gefeller and M. Schmid (2018).",
+          "The betaboost package - a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data.",
           "International Journal of Epidemiology. DOI: https://doi.org/10.1093/ije/dyy093.")
 )
 
