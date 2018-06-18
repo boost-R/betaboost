@@ -1,0 +1,46 @@
+citHeader("To refer to the actual 'betaboost' package use:")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("{R} package version", meta$Version)
+txt_vers <- paste("R package version", meta$Version)
+
+citEntry(
+  entry="Manual",
+  title = "{betaboost}: Boosting Beta Regression",
+  author = personList(as.person("Andreas Mayr"),
+                      as.person("Benjamin Hofner"),
+                      as.person("Leonie Weinhold"),
+                      as.person("Matthias Schmid")),
+  year = year,
+  note = vers,
+  url = "https://CRAN.R-project.org/package=betaboost",
+  textVersion =
+    paste("A. Mayr, B. Hofner, L. Weinhold and M. Schmid (", year,
+          "). betaboost: Boosting Beta Regression, ",
+          txt_vers, ", https://CRAN.R-project.org/package=betaboost", ".",
+          sep="")
+)
+
+citEntry(
+  entry="Article",
+  title = "The betaboost package—a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data",
+  author   =  personList(as.person("Andreas Mayr"),
+                         as.person("Leonie Weinhold"),
+                         as.person("Benjamin Hofner"),
+                         as.person("Stephanie Titze"),
+                         as.person("Olaf Gefeller"),
+                         as.person("Matthias Schmid")),
+  journal  = "International Journal of Epidemiology",
+  year	   = "2018",
+  volume   =  "",
+  number   =  "",
+  doi	   =  "https://doi.org/10.1093/ije/dyy093",
+  header   = "To cite 'betaboost' in publications, please use:",
+  textVersion =
+    paste("A. Mayr, L. Weinhold,B. Hofner, S. Titze, O. Gefeller and M. Schmid (2018).",
+          "The betaboost package—a software tool for modelling bounded outcome variables in potentially high-dimensional epidemiological data.",
+          "International Journal of Epidemiology. DOI: https://doi.org/10.1093/ije/dyy093.")
+)
+
+
+citFooter('\nUse ', sQuote('toBibtex(citation("gamboostLSS"))'), ' to extract BibTeX references.\n')
