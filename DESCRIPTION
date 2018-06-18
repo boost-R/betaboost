@@ -2,12 +2,12 @@ Package: betaboost
 Type: Package
 Title: Boosting Beta Regression
 Version: 1.0.0
-Date: 2018-05-28
+Date: 2018-06-18
 Author: Andreas Mayr, Benjamin Hofner, Leonie Weinhold, Matthias Schmid
 Maintainer: Andreas Mayr <mayr@uni-bonn.de>
 Description:  Implements boosting beta regression for potentially high-dimensional data. 
   The 'betaboost' package uses the same parametrization as 'betareg' to make results directly comparable. 
-  The underlying boosting algorithms are implemented via the R add-on packages 'mboost' and 'gamboostLSS'.
+  The underlying algorithms are implemented via the R add-on packages 'mboost' and 'gamboostLSS'.
 Depends: mboost, gamboostLSS
 Suggests: gamlss.dist, knitr, rmarkdown, betareg
 VignetteBuilder: knitr
