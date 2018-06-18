@@ -29,6 +29,13 @@ BetaReg <- function(mu = NULL, phirange =  c(.001, 1000)){
     sum(w * loss_mu(y = y, f = f, phi = phi))
   }
   
+  check_y <- function(y){
+    if(!is.numeric(y) || !is.null(dim(y)) ) stop("y is not a numeric vector")
+    if(any(y >= 1)) stop("y >=1 but trying to do beta-regression")
+    if(any(y <= 0)) stop("y <=0 but trying to do beta-regression")
+    return(y)
+  }
+  
   # ngradient is first derivative of log likelihood w.r.t. f
   ngradient <- function(y, f, w = 1) {
     # estimate phi
@@ -52,12 +59,7 @@ BetaReg <- function(mu = NULL, phirange =  c(.001, 1000)){
   # use the Family constructor of mboost
   mboost::Family(ngradient = ngradient, risk = risk, offset = offset,
                  response = function(f) plogis(f),
-                 check_y <- function(y) {
-                   if (!is.numeric(y) || !is.null(dim(y)))
-                     stop("response must be a numeric vector")
-                   if (any(y <= 0) | any(y >= 1))
-                     stop("response must be >0 and <1")
-                   y
-                 },nuisance = function() return(phi[length(phi)]),
+                 check_y = check_y,
+                 nuisance = function() return(phi[length(phi)]),
                  name = "Beta-Regression (logit link)")
 }

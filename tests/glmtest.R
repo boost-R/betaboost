@@ -200,6 +200,11 @@ coef(beta2, off2int = TRUE)
 stopifnot(identical(coef(beta1), coef(beta2)))
 #------------------
 
+# check for y 
+
+try(betaboost(QoL*2 ~ pain + arm, data = QoLdata), silent = TRUE)
+
+try(betaboost(I(QoL-1)~ pain + arm, data = QoLdata), silent = TRUE)
 
 
 # Errors 
