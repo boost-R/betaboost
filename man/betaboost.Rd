@@ -8,7 +8,7 @@ Wrapper function to use mode-based boosting via mboost or gamboostLSS to fit bet
 }
 \usage{
  betaboost(formula = NULL, phi.formula = NULL, data = list(), sl = 0.01,
-           iterations = 100, form.type = c("gamboost", "classic"),
+           iterations = 100, form.type = c("classic", "betaboost"),
            start.mu = NULL, start.phi = NULL, 
            stabilization = c("none", "MAD", "L2"), 
            y = NULL, x = NULL, mat.parameter = c("mean", "both"), 
