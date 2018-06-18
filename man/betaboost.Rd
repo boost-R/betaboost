@@ -69,7 +69,7 @@ A wrapper function to fit beta regression via different boosting functions.
 A boosting object.
 }
 \references{
-Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology. \doi{10.1093/ije/dyy093}.
+Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology, doi: 10.1093/ije/dyy093.
 
 Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, & Mayr A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
 }
@@ -77,8 +77,33 @@ Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, & Mayr A. (2013). Boosted
 The original function \code{\link{gamboostLSS}} and \code{\link{gamboost}} from the model-based boosting framework.
 }
 \examples{
+
+#---------- data example 
+
+data(QoLdata)
+
+## Model for mu  
+b1 <- betaboost(formula = QoL ~ arm + pain, data = QoLdata, 
+                iterations = 500)
+
+# Coeficients
+coef(b1, off2int = TRUE)
+
+# Phi
+nuisance(b1)
+
+## Model for mu and phi
+b2 <- betaboost(formula = QoL ~ arm + pain, data = QoLdata, 
+                iterations = 1000,
+                phi.formula = QoL ~ arm + pain)
+
+
+# Coeficients
+coef(b2, off2int = TRUE)
+
+#--------- simple simulated example
+
 require(gamlss.dist)
-# simple simulated example
 set.seed(1234)
 x1 <- rnorm(100)
 x2 <- rnorm(100)
@@ -90,24 +115,25 @@ data <- data.frame(y ,x1, x2, x3, x4)
 data <- data[!data$y \%in\% c(0,1),]
 
 # 'classic' beta regression
-b1 <- betaboost(formula = y ~ x1 + x2, data = data,
+b3 <- betaboost(formula = y ~ x1 + x2, data = data,
                 iterations = 120)
-coef(b1)
+coef(b3)
 
 # beta regression including modeled precision parameter
-b2 <- betaboost(formula = y ~ x1 + x2, 
+b4 <- betaboost(formula = y ~ x1 + x2, 
                 phi.formula = y ~ x3 + x4, 
                 data = data, iterations = 120)
 
 
 # with smooth effects for x1 and x3
-b3 <- betaboost(formula = y ~ s(x1) + x2, 
+b5 <- betaboost(formula = y ~ s(x1) + x2, 
                 phi.formula = y ~ s(x3) + x4, form.type = "classic",
                 data = data, iterations = 120)          
 
 
 # using matrix interface
-b4 <- betaboost(y = data$y, x = data[,2:5], iterations = 200, 
+b6 <- betaboost(y = data$y, x = data[,2:5], iterations = 200, 
                 mat.parameter = "both")          
+
 
 }

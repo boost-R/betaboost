@@ -24,7 +24,7 @@ test-data (optional), if omitted R^2 is computed on \code{data}  (training-data)
 }
 }
 \references{
-Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology. \doi{10.1093/ije/dyy093}.
+Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology, doi: 10.1093/ije/dyy093.
 }
 \examples{
 

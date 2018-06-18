@@ -18,7 +18,7 @@ BetaReg(mu = NULL, phirange =  c(.001, 1000))
 \author{Andreas Mayr <mayr@uni-bonn.de>
 }
 \references{
-Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology. \doi{10.1093/ije/dyy093}.
+Mayr A, Weinhold L, Hofner B, Titze S, Gefeller O, Schmid M (2018). The betaboost package - a software tool for modeling bounded outcome variables in potentially high-dimensional data. International Journal of Epidemiology, doi: 10.1093/ije/dyy093.
 
 Schmid M, Wickler F, Maloney KO, Mitchell R, Fenske N, & Mayr A. (2013). Boosted beta regression. PLoS ONE, 8(4), e61623.
 }
@@ -40,7 +40,7 @@ b1 <- betaboost(formula = y ~ x1 + x2, data = data,
                 iterations = 120)
 coef(b1)
 
-# compare mboost
+# compare to mboost
 b2 <- glmboost(y ~ x1  + x2, data = data, family = BetaReg())
 coef(b2)
 
