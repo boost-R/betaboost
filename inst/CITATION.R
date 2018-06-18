@@ -43,4 +43,4 @@ citEntry(
 )
 
 
-citFooter('\nUse ', sQuote('toBibtex(citation("gamboostLSS"))'), ' to extract BibTeX references.\n')
+citFooter('\nUse ', sQuote('toBibtex(citation("betaboost"))'), ' to extract BibTeX references.\n')
