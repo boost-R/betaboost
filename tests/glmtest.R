@@ -206,6 +206,13 @@ try(betaboost(QoL*2 ~ pain + arm, data = QoLdata), silent = TRUE)
 
 try(betaboost(I(QoL-1)~ pain + arm, data = QoLdata), silent = TRUE)
 
+try(betaboost(QoL*2 ~ pain + arm, phi.formula = QoL*2 ~ pain, 
+              data = QoLdata), silent = TRUE)
+
+try(betaboost(I(QoL-1)~ pain + arm, data = QoLdata), silent = TRUE)
+
+
+
 
 # Errors 
 try(betaboost(formula = y ~ x1, phi.formula = x1 ~ x2, 
