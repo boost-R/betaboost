@@ -13,7 +13,13 @@ R add-on packages `mboost` and `gamboostLSS`.
 
 ## Installation
 
-Latest version from GitHub:
+Current release from CRAN:
+  ```
+  install.packages("betaboost")
+  library("betaboost")
+  ```
+
+Latest development version from GitHub:
   ```
   library("devtools")
   install_github("boost-R/betaboost")
