@@ -34,7 +34,7 @@ citEntry(
   year	   = "2018",
   volume   =  "",
   number   =  "",
-  doi	   =  "https://doi.org/10.1093/ije/dyy093",
+  url	   =  "https://academic.oup.com/ije/advance-article-abstract/doi/10.1093/ije/dyy093/5037244",
   header   = "To cite 'betaboost' in publications, please use:",
   textVersion =
     paste("A. Mayr, L. Weinhold, B. Hofner, S. Titze, O. Gefeller and M. Schmid (2018).",
