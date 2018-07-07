@@ -27,7 +27,7 @@ suppressWarnings(confint(mod1, B.mstop = 2, B = 10))
 try(confint(mod2, B.mstop = 2, B = 10))
 
 # predictions
-predict.betaboost(mod1)
-predict.betaboost(mod2)
-predict.betaboost(mod2, parameter = "mu")
-predict.betaboost(mod2, parameter = "phi")
+predict(mod1)
+predict(mod2)
+predict(mod2, parameter = "mu")
+predict(mod2, parameter = "phi")
