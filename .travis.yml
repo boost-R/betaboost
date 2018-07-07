@@ -8,6 +8,9 @@ language: r
 sudo: required
 dist: trusty
 
+env:
+  - _R_S3_METHOD_LOOKUP_BASEENV_AFTER_GLOBALENV_=true
+
 repos:
   CRAN: https://cloud.r-project.org
 
