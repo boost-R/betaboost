@@ -5,7 +5,7 @@
   Longitudinal quality of life data
 }
 \description{
-  A data frame with 6 quality of life measures for 60 patients, originally published in the \code{QoLR} package: Analysis of Health-Related Quality of Life in oncology. For more details, see the \href{https://cran.r-project.org/src/contrib/Archive/QoLR}{CRAN archive}, the corresponding \href{https://github.com/cran/QoLR}{GitHub pare}, or the references below. 
+  A data frame with 6 quality of life measures for 60 patients, originally published in the \code{QoLR} package: Analysis of Health-Related Quality of Life in oncology. For more details, see the \href{https://cran.r-project.org/src/contrib/Archive/QoLR}{CRAN archive}, the corresponding \href{https://github.com/cran/QoLR}{GitHub page}, or the references below. 
 }
 \usage{data(dataqol2)}
 \format{
