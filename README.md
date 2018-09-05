@@ -4,7 +4,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/gc0ech6kpjniqemg?svg=true)](https://ci.appveyor.com/project/hofnerb/betaboost)
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/betaboost)](https://CRAN.R-project.org/package=betaboost)
 [![Coverage Status](https://coveralls.io/repos/github/boost-R/betaboost/badge.svg?branch=master)](https://coveralls.io/github/boost-R/betaboost?branch=master)
-[![](https://cranlogs.r-pkg.org/badges/betaboost)](https://cran.rstudio.com/web/packages/betaboost/index.html)
+[![](https://cranlogs.r-pkg.org/badges/betaboost)](https://cran.r-project.org/package=betaboost)
 
 
 `betaboost` implements a wrapper for boosting beta regression for potentially 
